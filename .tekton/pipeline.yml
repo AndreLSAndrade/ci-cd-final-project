@@ -1,0 +1,58 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: cd-pipeline
+spec:
+  params:
+    - name: IMAGE
+      type: string
+      description: Image reference to build and deploy
+    - name: APP_NAME
+      type: string
+      default: accounts
+  workspaces:
+    - name: source
+  tasks:
+    - name: cleanup
+      taskRef:
+        name: cleanup
+      workspaces:
+        - name: source
+          workspace: source
+    - name: lint
+      runAfter:
+        - cleanup
+      taskRef:
+        name: lint
+      workspaces:
+        - name: source
+          workspace: source
+    - name: tests
+      runAfter:
+        - lint
+      taskRef:
+        name: tests
+      workspaces:
+        - name: source
+          workspace: source
+    - name: build-image
+      runAfter:
+        - tests
+      taskRef:
+        name: build-image
+      params:
+        - name: IMAGE
+          value: $(params.IMAGE)
+      workspaces:
+        - name: source
+          workspace: source
+    - name: deploy
+      runAfter:
+        - build-image
+      taskRef:
+        name: deploy
+      params:
+        - name: APP_NAME
+          value: $(params.APP_NAME)
+        - name: IMAGE
+          value: $(params.IMAGE)
