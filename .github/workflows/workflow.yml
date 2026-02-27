@@ -1,6 +1,6 @@
 name: CI workflow
 
-'on':
+on:
 	push:
 		branches:
 			- main
@@ -9,7 +9,7 @@ name: CI workflow
 			- main
 
 jobs:
-	ci:
+	build:
 		runs-on: ubuntu-latest
 		container: python:3.9-slim
 		steps:
