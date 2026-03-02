@@ -1,0 +1,5 @@
+Repo: https://github.com/AndreLSAndrade/ci-cd-final-project
+README (project name): https://github.com/AndreLSAndrade/ci-cd-final-project/blob/main/README.md
+Workflow CI: https://github.com/AndreLSAndrade/ci-cd-final-project/blob/main/.github/workflows/workflow.yml
+Tekton tasks (URL pedido): https://github.com/AndreLSAndrade/ci-cd-final-project/blob/main/.tekton/tasks.yml
+Tekton pipeline: https://github.com/AndreLSAndrade/ci-cd-final-project/blob/main/.tekton/pipeline.yml
